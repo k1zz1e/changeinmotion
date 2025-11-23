@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Change in Motion has moved to <a href="https://astro.build/integrations">Astro!</a></h1>
+			
+			<p>
+				Astro is a JavaScript web framework optimized for building fast, content-driven websites.  
+			</p>	
+			<p>
+				Most of my old content from Wordpress will be transferred over in the next couple weeks.  XML and Gutenburg blocks 
+				are not the easiest to convert - and it's the holidays.  In the meantime, please check out Astro content on their website
+				to see what is possible.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
