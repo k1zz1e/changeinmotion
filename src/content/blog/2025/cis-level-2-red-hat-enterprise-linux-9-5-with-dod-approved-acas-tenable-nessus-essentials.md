@@ -18,17 +18,27 @@ In order to add some experience to my skillset, I really want to see how hard it
 
 If you are not familiar with Red Hat Enterprise Linux or the [Center for Internet Security's Hardened Images](https://www.cisecurity.org/cis-hardened-images) then you need to get to work reading! These are community-developed secure configurations of many Operating System distributions. I will be focusing on Red Hat Enterprise Linux since it is commonly deployed for DoD usage - see here at the [Red Hat DoD page](https://www.redhat.com/en/solutions/public-sector/dod) or if you want you can read the ebook _[Mission edge: How Red Hat helps accelerate DoD mission outcomes](https://www.redhat.com/en/engage/mission-edge-accelerates-dod-outcomes-ebook)_.
 
-[Mission Edge](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Mission-Edge.pdf)[Download](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Mission-Edge.pdf)
+<!--
+Source - https://stackoverflow.com/a
+Posted by Waylan, modified by community. See post 'Timeline' for change history
+Retrieved 2025-12-04, License - CC BY-SA 4.0
+-->
+
+<object data="/images/posts/2025/04/Mission-Edge.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="/images/posts/2025/04/Mission-Edge.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
 
 ## **\## RHEL 9.5 Installation** ##
 
 The initial view of the RHEL 9 installation has a few areas to complete as seen below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/image.png)
+![](/images/posts/2025/04/image.avif)
 
 For my Security Profile selection I chose the CIS Red Hat Enterprise Linux for Level 2 - Server. Since I am learning, I took a dice roll on using the more hardened edition vice CIS Level 1.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/image-1.png)
+![](/images/posts/2025/04/image-1.avif)
 
 Reading over the CIS Level 2 selection warnings you will see it is required to make separate partitions for the following directories:
 
@@ -51,15 +61,15 @@ You will add these under **Installation Destination** in the menus. I found a ni
 
 There are a few guides out there if you want to see the full process. Google is your friend!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/image-2.png)
+![](/images/posts/2025/04/image-2.avif)
 
 Backup your RHEL server in Proxmox. You never know - you might mess up everything having fun here.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/image-3.png)
+![](/images/posts/2025/04/image-3.avif)
 
 After the installation and setup you will arrive at your basic headless Linux server.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-6.58.26 PM-1024x642.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-6.58.26 PM.avif)
 
 There was a notification for enabling the web GUI not included in the screenshot. Enter the following command:
 
@@ -75,7 +85,7 @@ ss -tulpn | grep :9090
 
 You should see the following:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-7.16.28 PM-1024x69.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-7.16.28 PM.avif)
 
 So now that your RHEL web interface is live, use your VMs IP address to go to the site.
 
@@ -85,11 +95,11 @@ https://IPADDRESS:9090
 
 I can't say from experience yet whether it is ideal to install this in a DoD environment, but for learning purposes, I installed it.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/RHEL-web-interface-1024x745.png)
+![](/images/posts/2025/04/RHEL-web-interface.avif)
 
 For our next step I am going to go ahead and full send with the Nessus install and see what I can make happen. Download can be found here at the [Tenable](https://www.tenable.com/downloads/nessus?loginAttempted=true) site.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-7.39.56 PM-1024x750.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-7.39.56 PM.avif)
 
 Jump back to your terminal in RHELs web interface and grab the file:
 
@@ -105,7 +115,7 @@ yum install Nessus-<version number>-es6.x86_64.rpm
 
 After the download you can install as root and view the completion as seen below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-7.46.32 PM-919x1024.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-7.46.32 PM.avif)
 
 Then can verify if it's running with the **ss** command:
 
@@ -125,7 +135,7 @@ systemctl status nessusd
 
 Once you have verified the service is up and running you will need to unblock the port in your RHEL 9.5 firewall settings.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-8.49.56 PM-1024x658.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-8.49.56 PM.avif)
 
 Then go to your Nessus web interface:
 
@@ -135,35 +145,35 @@ https://IPADDRESS:8834
 
 This can be a bit tricky if you get lost in the process. You need to register online, so click continue. Then register for Nessus Essentials and fill out your information to get an activation code.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Screenshot-2025-04-04-at-8.34.40 PM-edited.png)
+![](/images/posts/2025/05/Screenshot-2025-04-04-at-8.34.40 PM-edited.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Screenshot-2025-04-04-at-8.34.48 PM-edited.png)
+![](/images/posts/2025/05/Screenshot-2025-04-04-at-8.34.48 PM-edited.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/nessus_init_2-1-edited.png)
+![](/images/posts/2025/05/nessus_init_2-1-edited.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Screenshot-2025-04-04-at-8.35.21 PM-edited-1.png)
+![](/images/posts/2025/05/Screenshot-2025-04-04-at-8.35.21 PM-edited-1.avif)
 
 So a few steps required to get it up and running but here we are at the tenable Nessus Essentials web interface:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-8.42.20 PM-1024x593.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-8.42.20 PM.avif)
 
 You may notice you can not create a scan right away. Appears you have to let the update processes run first. But moving on through the settings I discovered in fact my initial setup of CIS Level 2 RHEL 9.5 VM storage space was not sufficient for running Nessus.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-8.58.47 PM-1024x512.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-8.58.47 PM.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-9.01.30 PM.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-9.01.30 PM.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-9.02.27 PM.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-9.02.27 PM.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-9.03.05 PM.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-9.03.05 PM.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-9.03.12 PM.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-9.03.12 PM.avif)
 
 So you can see how this can be a bit of a learning experience if you don't know what you need from the start. Which is exactly why experiments should always be done in the homelab or away from production environments.
 
 **Going to the Storage tab of our Red Hat web interface we can see that it is in fact the /opt file specifically being hit by Nessus. This is where many of the scans and logs are stored.**
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-04-at-10.11.57 PM-1024x727.png)
+![](/images/posts/2025/04/Screenshot-2025-04-04-at-10.11.57 PM.avif)
 
 I am going to make another backup in Proxmox and then begin the exciting process of either breaking the VM or extending the storage space allocated to sda2.
 
@@ -191,7 +201,7 @@ Now to begin the choas! This is a long command but you can see it step by step b
 sudo fdisk /dev/sdb <<EOF
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-1.14.41 PM-1024x818.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-1.14.41 PM.avif)
 
 Most of these commands are quite clear and using --help will aid in understanding them. The <<EOF section breaks down as follows:
 
@@ -255,19 +265,19 @@ df -h /opt
 
 Now I'll return to the RHEL web interface to see if my fdisk journey is completed.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-1.34.42 PM-1024x730.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-1.34.42 PM.avif)
 
 ## **FDISK COMPLETE**
 
 After all our hard work navigating fdisk you can see the /opt volume has been resized to 32GB. Nessus should hopefully be happy now with the extra space. So now to re-install again.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-1.43.19 PM-1024x866.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-1.43.19 PM.avif)
 
 Well, would you look at that - 32GB was just a little under the requirement. Likely because a few GBs are already being consumed in the /opt volume by the operating system. If you dig through the Nessus documentation you will see it operates heavily out of /opt. So ideally, you should just allocate whatever amount you feel appropriate to your scanning needs.
 
 Nessus Essentials limits their free license to 16 IPs and we are not operating at a large scale or in a production environment, so you could delete logs as needed if you are restricted on space. Here we are at the web interface for Nessus. Host discovery does not count against your 16 IP limitation - so send a sweep out and grab some of your IPs for selection.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-4.23.09 PM-1024x494.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-4.23.09 PM.avif)
 
 It works wonderfully! If you have ever spent a lot of time at a BASH based approach or via Microsoft Powershell you can really appreciate the simplicity. Let's go ahead and setup a scan of an IP address. Choose whatever you wish in your own network.
 
@@ -275,24 +285,24 @@ It works wonderfully! If you have ever spent a lot of time at a BASH based appro
 
 The menu is quite simple but still a lot of complexity if you are not aware of all the functions here. I am going to use the Advance Dynamic Scan.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-4.37.51 PM-1024x838.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-4.37.51 PM.avif)
 
 Now I am not going to go super in depth here but I'll will provide some basic concepts of the scanning capabilities. I initially configured the various categories below to my liking and launched a scan of another IP address in my network. But decided it would be much more fun to scan something far less hardened. So I spun up a Metasploitable 2 virtual machine and targeted it with Nessus.
 
 Description and Targets setup is self explanatory. However the rest of the options to the left can get quite complex. For my second scan I used information provided by [InfoSec Write-ups](https://infosecwriteups.com/how-to-setup-advance-nessus-network-scan-c7fcf89e417b) to gather more intel on superior settings to my initial scans. Check that site for more on the Discover, Assessment, Report, and Advance settings or looking through Tenable documentation as desired.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-8.00.31 PM-1024x540.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-8.00.31 PM.avif)
 
 Now it's time to run the scan! As you can see the Metasploitable 2 VM has quite the many vulnerabilities - 6 critical, 10 high, and 28 info items. I need to get back to exploiting this VM soon!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-8.51.04 PM-1024x540.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-8.51.04 PM.avif)
 
 The Vulnerabilities tab reveals tons of information for offense and for defense as your projects may require.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-8.56.28 PM-1024x634.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-8.56.28 PM.avif)
 
 And then the Remediations tab which is very helpful in identifying solutions to vulnerabilities found during the scan. Such as, _"GNU Bash Environment Variable Handling Code Injection (Shellshock): Apply the referenced patch to address CVE-2014-6271 (Shellshock)."_ You can jump write over to the CVE website and research the [Shellshock](https://cve.mitre.org/cgi-bin/cvename.cgi?name=cve-2014-6271) vulnerability with ease.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/04/Screenshot-2025-04-05-at-8.56.38 PM-1024x634.png)
+![](/images/posts/2025/04/Screenshot-2025-04-05-at-8.56.38 PM.avif)
 
 This is probably a solid point to stop and take a break. Of course I will continue to tinker and read through documentation for Nessus and see how it can be employed for helping me in offense. I've been utilizing [Nuclei](https://github.com/projectdiscovery/nuclei) and [Metasploit](https://www.metasploit.com/) as of lately - but I felt an energy shift as I have been needing to train more on things applicable to my work. The DoD has standardized Nessus as it's ACAS of choice back in 2012. If it's not something you are training on then you may need to take a deep dive immediately!

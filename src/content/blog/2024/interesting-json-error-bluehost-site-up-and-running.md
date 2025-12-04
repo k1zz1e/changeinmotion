@@ -8,15 +8,15 @@ heroImage: "/images/posts/notes2.webp"
 ---
 The site is up and running without issue... until now. I started editing my very first post on the site due to bad formatting. I didn't really understand Wordpress yet, so it definitely needed to be polished up. Somehow in the process I discovered a error on Wordpress. And even though it's not a homelab project, it's a problem - and it must be vanquished!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-26-at-12.58.16 AM-1024x406.png)
+![](/public/images/posts/2024/12/Screenshot-2024-12-26-at-12.58.16 AM.avif)
 
 Upon investigation it appears it could one of a couple things. A cache issue, which I have cleared. Or an issue with the .htaccess file hosted on the domain provider. They make this surprisingly easy to investigate - see File Manager.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-26-at-1.08.13 AM-1024x374.png)
+![](/public/images/posts/2024/12/Screenshot-2024-12-26-at-1.08.13 AM.avif)
 
 cPanel! I have heard quite a bit about this but was not aware it was simply a file directory browser on the backend of the site. This file was hiding - **Settings > Show Hidden Files (dotfiles)**.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-26-at-1.09.36 AM-1024x378.png)
+![](/public/images/posts/2024/12/Screenshot-2024-12-26-at-1.09.36 AM.avif)
 
 > **Instructions for the .htacess file:** [https://blog.hubspot.com/website/json-response-error-wordpress](https://blog.hubspot.com/website/json-response-error-wordpress)
 > 

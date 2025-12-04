@@ -8,8 +8,7 @@ heroImage: "/images/posts/bluehost.webp"
 ---
 Alright, I am going to start it off checking into the HTTPS settings. I setup a Cloudfare account and that end looks good to go.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-8.16.29 PM-1024x658.png)
-
+![](/images/posts/Screenshot-2024-12-22-at-8.16.29 PM.avif)
 Not sure if a need a public domain name to get the Wordpress site setup on the Tunnels section or simply make one up for local use. Going to setup cloudflare on the VM for starters.
 
 ```
@@ -30,9 +29,9 @@ I'm going to start it up investigating Apache2 settings.
 systemctl status apache2
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-8.18.27 PM-1024x773.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-8.18.27 PM.avif)
+### DONT CHANGE THE URL IN THE WORDPRESS GUI! :D
 
-DONT CHANGE THE URL IN THE WORDPRESS GUI!
 
 I was investigating the Let's Encrypt SSL certificate generator and thought I needed to add a domain name in the Wordpress settings. Little did I know, I would make it inaccessible!
 
@@ -48,23 +47,23 @@ So yeah, a few errors were made. But the goal of getting the Wordpress live in s
 
 Going through this process was surprisingly simple.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-29-at-3.58.13 PM-1024x757.png)
+![](/images/posts/2024/12/Screenshot-2024-12-29-at-3.58.13 PM.avif)
 
 To set up an account click on Domains - Buy a domain.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-29-at-4.01.45 PM-1024x804.png)
+![](/images/posts/2024/12/Screenshot-2024-12-29-at-4.01.45 PM.avif)
 
 Simply type in a name you want to use for your site domain.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-29-at-4.02.11 PM-1024x804.png)
+![](/images/posts/2024/12/Screenshot-2024-12-29-at-4.02.11 PM.avif)
 
 Then select from the list of available domains.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-29-at-4.05.49 PM-1024x804.png)
+![](/images/posts/2024/12/Screenshot-2024-12-29-at-4.05.49 PM.avif)
 
 To upload my Wordpress site I ended up using a plugin called [UpdraftPlus Backup/Restore](https://wbb.afh.mybluehost.me/). I did try and use the WordPress Importer tool but it did not pull a 100% copy of my localhost site.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-29-at-4.10.10 PM-1024x804.png)
+![](/images/posts/2024/12/Screenshot-2024-12-29-at-4.10.10 PM.avif)
 
 This plugin worked flawlessy. Site is live! Probably better that it's hosted externally from my local network. Additionally, Bluehost offered a free Let’s Encrypt SSL certificate from Really Simple Security. To many wins for so little investment up front.
 

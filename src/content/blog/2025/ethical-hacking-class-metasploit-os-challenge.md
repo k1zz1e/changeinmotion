@@ -113,19 +113,21 @@ Password: anonymous@domain.com
 
 After a successful login. I use very simple commands to grab the readthis.txt file.  
 
-ftp > **get readthis.txt**
+```
+ftp > get readthis.txt
+```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/02/Screenshot-2025-02-22-at-7.14.38 PM-1-1024x526.png)
+![](/images/posts/2025/02/Screenshot-2025-02-22-at-7.14.38 PM.avif)
 
 Upon display of the contents of the file I found the file contains login information. This has potential to be the first flag.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/02/Screenshot-2025-02-22-at-7.16.01 PM-1024x85.png)
+![](/images/posts/2025/02/Screenshot-2025-02-22-at-7.16.01 PM.avif)
 
 Opening up the Metasploit VM of Ubuntu we use the login information above which allowed us to gain root access to the  Ubuntu OS. 
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/03/image.png)
+![](/images/posts/2025/03/image.avif)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/03/image-1.png)
+![](/images/posts/2025/03/image-1.avif)
 
 Now we need to look for the hash information on the other user accounts. To find this we must explore two files in the /**etc** folder:
 
@@ -142,14 +144,12 @@ unshadow passwd shadow > unshadow.txt
 
 The output of unshadow.txt below reveals our second flag - the hash for elmo.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/03/image-2-1024x284.png)
-
+![](/images/posts/2025/03/image-2.avif)
 _**unshadow.txt file output**_
 
 Next we move our unshadow.txt file over to our Kali VM and run it against the "[rockyou.txt](https://github.com/dw0rsec/rockyou.txt)" wordlist in John the Ripper aka "John." As you can see it grabbed passwords for most of the hashes we fed it below.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/02/Screenshot-2025-02-13-at-9.48.26 PM-1024x518.png)
-
+![](/images/posts/2025/02/Screenshot-2025-02-13-at-9.48.26 PM.avif)
 **_results of John running on our unshadow.txt file_**
 
 If you observe the output from above versus the unshadow.txt file you will notice John did not spit out a password for our cookiemonster hash:
@@ -160,7 +160,7 @@ cookiemonster:$1$Lq4lHJ0b$evOHD.itBRq2EupoAw.j..:1005:1005:,,,:/home/cookiemonst
 
 This of course was not initially clear to me why - but I was certain it was not in the "rockyou.txt" wordlist. So I pulled the string out of the "unshadow.txt" file and ran it separately in a file called "cookiemonster.txt" with an "incremental" modifier for a brute force attack. John took roughly six minutes on my M1 Macbook to find the password:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/03/image-3.png)
+![](/images/posts/2025/03/image-3.avif)
 
 ```
 cookiemonster:eye:1005:1005:,,,:/home/cookiemonster:/bin/bash

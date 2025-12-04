@@ -7,7 +7,7 @@ pubDate: "Dec 22 2024"
 heroImage: "/images/posts/proxmoxk8s.webp"
 ---
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-7.57.47 PM-1024x667.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-7.57.47 PM.avif)
 
 Last times journey in LXC containers reveal an incredible simply way to install Linux containers with "pvecm available" and I spun up three containers. This was the sole reason behind buying four Elitedesk 800 G4s - to get away from Kubernetes installs on Raspberri Pi 4s. Way easier to learn if I don't waste a bunch of time wiping SD cards.
 
@@ -15,10 +15,12 @@ Lets spin up some K8S on these LXC containers!
 
 Ubuntu 24.10 containers don't have "curl" but additionally we need to update our packges.
 
+```
 sudo apt update
-
+```
+```
 apt install curl
-
+```
 ```
 # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
@@ -30,7 +32,6 @@ Validate the binary:
 ```
 
 ```
-
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 ```
 
@@ -56,7 +57,7 @@ As per requirements of installing kubeadm I will check the required ports for op
 nc 127.0.0.1 6443 -v
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-9.15.11 PM-1024x621.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-9.15.11 PM.avif)
 
 Doesn't look good, but the guide doesn't really specify what I am looking for. Quick search reveals a few golden eggs:
 
@@ -68,7 +69,7 @@ ufw allow 6443
 
 Since nmap is not installed on the Ubuntu containers, I attempted to nmap the LXC2 container from my MacBook at IP: 192.168.2.15 and only see the SSH port is opened. :(
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-9.21.48 PM-1024x612.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-9.21.48 PM.avif)
 
 A more complex way I discovered was to use lsof
 
@@ -81,7 +82,7 @@ sudo lsof -i -nP | grep LISTEN
 *   **\-P** to display the port numbers.
 *   The **grep** command is used to filter the list with only listening ports (not the ones used by established connections, for example).
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-9.35.16 PM-1024x616.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-9.35.16 PM.avif)
 
 Very exciting! But no port 6443 on the list. kubeadm states this as a requirement so I am not certain what is next here...
 
@@ -89,7 +90,7 @@ Very exciting! But no port 6443 on the list. kubeadm states this as a requiremen
 sudo lsof -i:22 (22 = port number)
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-9.36.29 PM-1024x616.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-9.36.29 PM.avif)
 
 More excitement! COMMAND information relating to the port and so much more! Sadly, it did not reveal anything for 6443 but as an example I searched for port 22.
 
@@ -103,7 +104,7 @@ sudo ss -ltn
 *   **\-l**: Only list ports open in LISTEN mode (the grep equivalent),
 *   **\-n**: Shows port numbers, do not use their names (http, ssh, …).
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-9.37.21 PM-1024x616.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-9.37.21 PM.avif)
 
 Additional use of the GREP command can filter results.
 
@@ -117,15 +118,9 @@ You can also nmap your own host if you use:
 sudo nmap -p 80 localhost
 ```
 
-* * *
-
 DISTRACTION COMPLETE! What rabbit hole. Lets get back to messing with **kubeadm**. Not so sure this port will open unless a service requests it. I already added it to the firewall.
 
-* * *
-
 So many issues with kubeadm install. No wonder I never got it up and running in the past. [https://github.com/kubernetes/kubeadm/issues](https://github.com/kubernetes/kubeadm/issues)
-
-* * *
 
 ## These instructions are for Kubernetes v1.32.
 
@@ -134,25 +129,25 @@ So many issues with kubeadm install. No wonder I never got it up and running in 
 ```
 sudo apt-get update
 
-# apt-transport-https may be a dummy package; if so, you can skip that package
+apt-transport-https may be a dummy package; if so, you can skip that package
 
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 ```
 
 2\. Download the public signing key for the Kubernetes package repositories. The same signing key is used for all repositories so you can disregard the version in the URL:
 
-```
-# If the directory `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
 
+If the directory `/etc/apt/keyrings` does not exist, it should be created before the curl command:
+```
 sudo mkdir -p -m 755 /etc/apt/keyrings
 
-# curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
 
 3\. Add the appropriate Kubernetes `apt` repository. Please note that this repository have packages only for Kubernetes 1.32; for other Kubernetes minor versions, you need to change the Kubernetes minor version in the URL to match your desired minor version (you should also check that you are reading the documentation for the version of Kubernetes that you plan to install).
 
 ```
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
 
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
@@ -173,15 +168,13 @@ sudo systemctl enable --now kubelet
 
 The kubelet is now restarting every few seconds, as it waits in a crashloop for kubeadm to tell it what to do.
 
-* * *
-
 ```
 kubeadm init
 ```
 
 Is throwing mad errors!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-10.34.40 PM-1024x889.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-10.34.40 PM.avif)
 
 > "Failed to parse kernel config: unable to load kernel module."
 
@@ -197,7 +190,7 @@ The pct command is to be used in the shell of the node to manage Linux Container
 
 Ah! New errors to investigate! Lovely! <3
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-10.41.51 PM-1024x891.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-10.41.51 PM.avif)
 
 Appears, upon research there may be a lack of containerd in these LXCs. The new preflight warning speaks to this.
 
@@ -209,30 +202,71 @@ There is in fact no "containerd" located under /var/run.. maybe I should try to 
 [https://github.com/containerd/containerd/releases](https://github.com/containerd/containerd/releases)
 
 ```
-# curl https://github.com/containerd/containerd/releases/download/v2.0.1/containerd-2.0.1-linux-amd64.tar.gz
+curl https://github.com/containerd/containerd/releases/download/v2.0.1/containerd-2.0.1-linux-amd64.tar.gz
 ```
 
 Then following along with the "Getting Started" section we need to extract the tar file locally.
 
 [https://github.com/containerd/containerd/blob/main/docs/getting-started.md](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)
 
+```
 tar Cxzvf /usr/local containerd-2.0.1-linux-amd64.tar.gz
+```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-11.11.55 PM-1024x460.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-11.11.55 PM.avif)
 
-> If you intend to start containerd via systemd, you should also download the `containerd.service` unit file from [https://raw.githubusercontent.com/containerd/containerd/main/containerd.service](https://raw.githubusercontent.com/containerd/containerd/main/containerd.service) into `/usr/local/lib/systemd/system/containerd.service`, and run the following commands:
-> 
-> systemctl daemon-reload  
-> systemctl enable --now containerd
+If you intend to start containerd via systemd, you should also download the `containerd.service` unit file from [GitHub](https://raw.githubusercontent.com/containerd/containerd/main/containerd.service) or below, then copy it into your `/usr/local/lib/systemd/system/containerd.service`
 
-Oh how exciting! curl simply displays the file I am in trying to download in BASH.
+## NOTE: curl will display what you try to download in BASH.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-11.19.01 PM-1017x1024.png)
+```
+# Copyright The containerd Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target dbus.service
+
+[Service]
+ExecStartPre=-/sbin/modprobe overlay
+ExecStart=/usr/local/bin/containerd
+
+Type=notify
+Delegate=yes
+KillMode=process
+Restart=always
+RestartSec=5
+
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=infinity
+LimitCORE=infinity
+
+# Comment TasksMax if your systemd version does not supports it.
+# Only systemd 226 and above support this version.
+TasksMax=infinity
+OOMScoreAdjust=-999
+
+[Install]
+WantedBy=multi-user.target
+```
 
 New command knowledge! curl the text from the URL into a file called containerd.service
 
 ```
-# curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o "containerd.service"
+curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o "containerd.service"
 
 cp containerd.serivce /lib/systemd/system
 ```
@@ -241,7 +275,7 @@ cp containerd.serivce /lib/systemd/system
 cd /lib/systemd/system && ls
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-11.29.00 PM-646x1024.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-11.29.00 PM.avif)
 
 We can now see the containerd.service file located in the directory.
 
@@ -257,7 +291,10 @@ Typically, you will have to install [runc](https://github.com/opencontainers/ru
 
 Download the `containerd-<VERSION>-<OS>-<ARCH>.tar.gz` archive from [https://github.com/containerd/containerd/releases](https://github.com/containerd/containerd/releases) , verify its sha256sum, and extract it under `/usr/local`:
 
-$ tar Cxzvf /usr/local containerd-1.6.2-linux-amd64.tar.gz
+```
+tar Cxzvf /usr/local containerd-1.6.2-linux-amd64.tar.gz
+```
+```
 bin/
 bin/containerd-shim-runc-v2
 bin/containerd-shim
@@ -265,6 +302,7 @@ bin/ctr
 bin/containerd-shim-runc-v1
 bin/containerd
 bin/containerd-stress
+```
 
 The `containerd` binary is built dynamically for glibc-based Linux distributions such as Ubuntu and Rocky Linux. This binary may not work on musl-based distributions such as Alpine Linux. Users of such distributions may have to install containerd from the source or a third party package.
 
@@ -276,14 +314,14 @@ The `containerd` binary is built dynamically for glibc-based Linux distributio
 > 
 > The `cri-containerd-...` archives are [deprecated](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features), do not work on old Linux distributions, and will be removed in containerd 2.0.
 
-##### systemd
+## systemd
 
 If you intend to start containerd via systemd, you should also download the `containerd.service` unit file from [https://raw.githubusercontent.com/containerd/containerd/main/containerd.service](https://raw.githubusercontent.com/containerd/containerd/main/containerd.service) into `/usr/local/lib/systemd/system/containerd.service`, and run the following commands:
 
 systemctl daemon-reload  
 systemctl enable --now containerd
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-21-at-11.32.20 PM-1024x498.png)
+![](/images/posts/2024/12/Screenshot-2024-12-21-at-11.32.20 PM.avif)
 
 #### Step 2: Installing runc[](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#step-2-installing-runc)
 
@@ -321,11 +359,11 @@ $ tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.1.1.tgz
 
 The binaries are built statically and should work on any Linux distribution.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-12.26.22 AM-1024x580.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-12.26.22 AM.avif)
 
 **Lets see where we are at now!** XD
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-12.28.13 AM-1024x894.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-12.28.13 AM.avif)
 
 The containerd error is now gone. Time to investigate some more errors. So much work to get this K8S Linux Container (LXC) operational!
 
@@ -336,7 +374,7 @@ Well, maybe this is the way to remove the error:
 [ERROR FileContent--proc-sys-net-ipv4-ip_forward]: /proc/sys/net/ipv4/ip_forward contents are not set to 1
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-12.47.32 AM-676x1024.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-12.47.32 AM.avif)
 
 I removed the # from the net.ipv4.ip\_forward=1 and then ran a reboot on the LXC and I still have the same error.
 
@@ -365,18 +403,16 @@ Verify that `net.ipv4.ip_forward` is set to 1 with:
 sysctl net.ipv4.ip_forward
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-1.19.48 AM-794x1024.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-1.19.48 AM.avif)
 
 Not so sure all those Read-only ignores are for the best but the net.ipv4.ip\_forward = 1 did check out!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-1.21.15 AM-1024x578.png)
+![](/images/posts/2024/12/Screenshot-2024-12-22-at-1.21.15 AM.avif)
 
 ..... to be continued..... it's almost 2am. WHHHYYY?!!!
-
-* * *
 
 ## Good info on kubeadm reset: But not in the timeline of last night. :)
 
 > [https://stackoverflow.com/questions/54975986/preflight-errors-in-kubernetes-installation](https://stackoverflow.com/questions/54975986/preflight-errors-in-kubernetes-installation)
 > 
-> ![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-22-at-11.43.46 AM-777x1024.png)
+> ![](/images/posts/2024/12/Screenshot-2024-12-22-at-11.43.46 AM.avif)

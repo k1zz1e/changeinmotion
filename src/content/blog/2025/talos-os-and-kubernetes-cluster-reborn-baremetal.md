@@ -30,7 +30,7 @@ talosctl gen config TalosK8S https://192.168.3.2:6443
 
 Output in my Warp terminal can be seen below and then corresponding mess because I forgot to make a folder for the output.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Warp-Generate-Talon-Configs-1024x640.png)
+![](/images/posts/2025/10/Warp-Generate-Talon-Configs.avif)
 
 So make a folder for your configuration files and then you can open the three config YAML files from our control node in Visual Studio Code for editing.
 
@@ -56,13 +56,13 @@ So make a folder for your configuration files and then you can open the three co
 
 You can see below in the left column I have created a couple of different files. The Customized folder for making lots of mistakes with my configurations and the Default folder - because you always need a backup.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Default-controlplane-yaml-1007x1024.png)
+![](/images/posts/2025/10/Default-controlplane-yaml.avif)
 
 So if you are anything like me, you like to edit a lot of things and make tons of errors. So there was a bit of delay in applying my configuration to the cluster. But I came across the solution:
 
 In the documentation you can see the very same error I encountered by not specifying the target disk (one of many errors but this was the final boss).
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Modifying-the-Machine-Config-841x1024.png)
+![](/images/posts/2025/10/Modifying-the-Machine-Config.avif)
 
 [https://docs.siderolabs.com/talos/v1.8/getting-started/getting-started](https://docs.siderolabs.com/talos/v1.8/getting-started/getting-started)
 
@@ -89,7 +89,7 @@ talosctl get disks -i -n 192.168.3.2
 
 You can see the results of this below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/talosctl-get-disks-1024x115.png)
+![](/images/posts/2025/10/talosctl-get-disks.avif)
 
 Our YAML file by default when being generated has the disk set to **/dev/sda**. But the correct disk is **/dev/nvme0n1** as seen above. So edit your **_controlplane.yaml_** and change the drive string to reflect the correct drive; it's also your installation drive for Talos.
 
@@ -119,11 +119,11 @@ talosctl bootstrap -n 192.168.3.2 -e 192.168.3.2 --talosconfig talosconfig
 
 After that you should see your control node show "Running" under the "STAGE" section.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Talos-Health-1024x120.png)
+![](/images/posts/2025/10/Talos-Health.avif)
 
 If you go to your browser now and type in [https://192.168.3.2:6443](https://192.168.3.2:6443) you can see the control node is receiving connections and providing output:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Control-plane-in-the-browser.png)
+![](/images/posts/2025/10/Control-plane-in-the-browser.avif)
 
 You can pull up the health dashboard to see what is happening on the node with the following command:
 
@@ -135,7 +135,7 @@ This is the same output you would see on a monitor connected to the node. There 
 
 Oh, here is the health dashboard:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Health-Dashboard-1024x676.png)
+![](/images/posts/2025/10/Health-Dashboard.avif)
 
 [https://docs.siderolabs.com/talos/v1.9/deploy-and-manage-workloads/interactive-dashboard](https://docs.siderolabs.com/talos/v1.9/deploy-and-manage-workloads/interactive-dashboard)
 
@@ -165,19 +165,19 @@ I used homebrew on MacOS so my command is shown as the following:
 brew install kubectl
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Homebrew-kubectl-Install-1024x373.png)
+![](/images/posts/2025/10/Homebrew-kubectl-Install.avif)
 
 Then to test if everything is working we run a simple command on my host computer (MacBook):
 
 kubectl get nodes
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/kubectl-get-nodes-1024x116.png)
+![](/images/posts/2025/10/kubectl-get-nodes.avif)
 
 Quite exciting to see a functioning node! And this time, no SD cards or Raspberry Pi cluster shenanigans. I did enjoy my RPi cluster projects greatly – if you haven't started anywhere, definitely start there to get a feel for K3S or MicroK8S: [https://k3s.io/](https://k3s.io/) and [https://microk8s.io/](https://microk8s.io/). Both are lightweight versions of Kubernetes, and MicroK8S is baked into Ubuntu, which functions rather smoothly.
 
 And if you got a 3D printer, maybe get a little wild and print a Pi cluster rack.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Pi-Cluster-3D-Print-1024x567.png)
+![](/images/posts/2025/10/Pi-Cluster-3D-Print.avif)
 
 > **break; _//_** _DAY TWO BEGINS_
 
@@ -189,11 +189,11 @@ Firing up node two with the Talos flash drive. Everything checks out as expected
 talosctl get disks -i -n 192.168.3.3
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Worker-Node-Disks-1024x67.png)
+![](/images/posts/2025/10/Worker-Node-Disks.avif)
 
 Change the configuration of your worker.yaml in Visual Studio Code (or Kate, or any syntax friendly text editor!) to incorporate the correct disk title: /dev/nvme0n1
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Worker-YAML-1024x1021.png)
+![](/images/posts/2025/10/Worker-YAML.avif)
 
 Interesting error encountered! I tried to reach the dashboard on the new worker node and was unable to reach it with different variations of the the talos dashboard command. Seems you cannot access another node with configuration files generated by another. I suppose I will go forward and apply the worker.yaml file.
 
@@ -215,7 +215,7 @@ _Talos is live on the installation disk of your node... pull flash drive..._
 
 The difference can be seen at the top of the dashboard under CLUSTER (two machines). I am logged in to the control plane node here:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/Talos-Dashboard-Two-Machines-1024x138.png)
+![](/images/posts/2025/10/Talos-Dashboard-Two-Machines.avif)
 
 Quite simple to continue adding nodes now for Kubernetes to run wild on. I have three set aside for this cluster. The third one is as simple as the previous.
 
@@ -243,7 +243,7 @@ Now lets see if we have them all configured and in our cluster.
 kubectl get nodes
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/10/kubectl-get-nodes-1-1024x583.png)
+![](/images/posts/2025/10/kubectl-get-nodes-1.avif)
 
 _Oh My Zsh?! Look at that cute terminal!_
 

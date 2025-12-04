@@ -8,11 +8,11 @@ heroImage: "/images/posts/packettracer.jpg"
 ---
 My oh my, have I been busy! I have been running almost 5 miles everyday, studying for the Security+ exam, testing network ideas at work, taking two college classes and somehow still finding a little time to play guitar and rest. Just look at these running stats!
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/May-Running-Stats-1024x634.png)
+![](/images/posts/2025/05/May-Running-Stats.avif)
 
 And if your a big running nerd like me then you will appreciate my non-Cisco related plug for the ASICS Novablast 4s! I've been wearing these since their second iteration after I retired my Hoka Rincon addiction.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Novablast-4-1024x575.png)
+![](/images/posts/2025/05/Novablast-4.avif)
 
 But alas! Cisco Packet Tracer fun has been ongoing for my college course on Switching, Routing, and Wireless Essentials. This post will document my learning experience and completion of my second Project in class.
 
@@ -24,7 +24,7 @@ So in my setup here we have a basic setup of a rather simple LAN design. Of cour
 *   [CISCO 2811 Router](https://www.cisco.com/web/ANZ/cpp/refguide/hview/router/2800.html#cisco2811)
 *   PC-A, PC-B, PC-C and PC-D (Windows PCs)
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/LAN-Setup-Descriptionjpg-1015x1024.jpg)
+![](/images/posts/2025/05/LAN-Setup-Descriptionjpg.avif)
 
 To begin you need to click on \[Network Devices\] and select \[Routers\] - then in the center scroll over to 2811, click and add it. Right beside \[Routers\], you will select \[Switches\] and select 2960 from the center and add it.
 
@@ -44,7 +44,7 @@ Since we need specific interfaces on the switch for this project, click the tria
 
 The FastEthernet titles represent physical ports or interfaces on the Cisco 2960 Switch. You can see below in the menu there are 24 switch ports, 2 gigabit ports and a console port. This can be viewed by hovering the switch icon.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Switch-Interfaces-1024x843.png)
+![](/images/posts/2025/05/Switch-Interfaces.avif)
 
 _Try hovering others icons and see what information they display._
 
@@ -62,7 +62,7 @@ Our game plan is as follows:
 
 Starting with the router (repeat process for switch), double click the router icon and select the CLI tab - you will be greeted with a startup screen. If you it asks about an initial configuration, type "No" and press enter.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Router-CLI-912x1024.png)
+![](/images/posts/2025/05/Router-CLI.avif)
 
 You should see user EXEC mode now:
 
@@ -122,7 +122,7 @@ So if you go back up and re-evaluate the commands above you can see we are simpl
 
 Subcommands for EXEC mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/EXEC-commands-1024x739.png)
+![](/images/posts/2025/05/EXEC-commands.avif)
 
 **Privileged EXEC mode**: You enter this mode from user EXEC mode by typing the command `**enable**` and pressing enter. This mode is typically password protected with the `**enable password**` command (used in global configuration mode). From privileged EXEC mode you can configure the device, manage its operations, and access other configuration modes, like global configuration mode. Example prompt:
 
@@ -132,7 +132,7 @@ Subcommands for EXEC mode:
 
 Subcommands for Priviledged EXEC mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Priviledged-EXEC-commands-815x1024.png)
+![](/images/posts/2025/05/Priviledged-EXEC-commands.avif)
 
 **Global Configuration mode**: You enter this mode from privileged EXEC mode by typing `**configure terminal**, **config t**,` or `**conf t**`. This mode allows you to configure parameters that apply to the entire device e.g., hostname, passwords, routing protocols. Example prompt:
 
@@ -142,7 +142,7 @@ Subcommands for Priviledged EXEC mode:
 
 Subcommands for Global configuration mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Global-configuration-commands-927x1024.png)
+![](/images/posts/2025/05/Global-configuration-commands.avif)
 
 **VLAN configuration mode**: You enter this mode from global configuration mode by typing **`vlan <vlan-id>`**. This mode allows you to create, modify, and delete VLANs.
 
@@ -152,7 +152,7 @@ Subcommands for Global configuration mode:
 
 Subcommands for VLAN configuration mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/VLAN-configuration-commands-1024x213.png)
+![](/images/posts/2025/05/VLAN-configuration-commands.avif)
 
 **Interface configuration mode**: You enter this mode from global configuration mode by typing **`interface`** type and number, e.g., `**interface Fa0/1**` . This mode allows you to configure the settings for a specific network interface (e.g., Ethernet, Serial). Example prompt:
 
@@ -162,7 +162,7 @@ Subcommands for VLAN configuration mode:
 
 Subcommands for Interface configuration mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Interface-configuration-mode-1024x612.png)
+![](/images/posts/2025/05/Interface-configuration-mode.avif)
 
 **Line configuration mode** - You enter this mode from the global configuration mode by using the `**line**` command with a specific line type e.g., **`line console 0`**, **`line vty 0 15`**. This mode allows you to configure the terminal lines, such as the console, Telnet, or SSH lines. .  Example prompt:
 
@@ -172,7 +172,7 @@ Subcommands for Interface configuration mode:
 
 Subcommands for line configuration mode:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Line-config-commands-1024x610.png)
+![](/images/posts/2025/05/Line-config-commands.avif)
 
 * * *
 
@@ -180,7 +180,7 @@ Overwhelmed yet? There are a ton of options within each command mode. It could t
 
 <Insert unnecessary comical humor here>
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/image.png)
+![](/images/posts/2025/05/image.avif)
 
 _"Fill your eyes with.. double vision_." - Revenge of the Mooninites S01E08
 
@@ -190,19 +190,19 @@ My age is showing... I know. But Foreigner rules! So I had to drop a reference t
 
 For each of the computers we are going to configure the following IP, subnet, and gateway.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Cisco-LAN-PC-config-1024x595.png)
+![](/images/posts/2025/05/Cisco-LAN-PC-config.avif)
 
 Back to the Cisco Packet Tracer GUI and click on PC-A:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Cisco-Packet-Tracer-PC-A-993x1024.png)
+![](/images/posts/2025/05/Cisco-Packet-Tracer-PC-A.avif)
 
 Then you can go to the config tab at the top and the FastEthernet0 menu on the left side - the enter your IP and Subnet Mask:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/PC-A-IP-Subnet-1015x1024.png)
+![](/images/posts/2025/05/PC-A-IP-Subnet.avif)
 
 Stay in the Config menu and go to the Settings menu on the left and you will find the Default gateway input field:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/PC-A-Gateway-1015x1024.png)
+![](/images/posts/2025/05/PC-A-Gateway.avif)
 
 _Alternatively you can click on Desktop tab and go to IP Configuration (see below)._
 
@@ -210,7 +210,7 @@ Do this same path for all four PCs and configure them accordingly.
 
 If you haven't already, click on one of the PCs and go to the Desktop tab in the GUI - you will see all lot of options; including the Command Prompt for running the `ping` command later.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/PC-A-Desktop-options--732x1024.png)
+![](/images/posts/2025/05/PC-A-Desktop-options-.avif)
 
 **Define the VLANs**
 
@@ -243,7 +243,7 @@ Switch#
 
 To see your configured VLAN, use `show vlan brief` in Privileged EXEC mode. It should look like below.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/S1-show-VLAN-brief-1024x515.png)
+![](/images/posts/2025/05/S1-show-VLAN-brief.avif)
 
 _Notice the VLAN 1 default currently contains all the interfaces?_
 
@@ -251,7 +251,7 @@ _Notice the VLAN 1 default currently contains all the interfaces?_
 
 As seen above the VLANs have been created but the interfaces for the switch have no been assigned. We need to assign them as seen below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Switch-Configuration-1024x567.jpg)
+![](/images/posts/2025/05/Switch-Configuration.avif)
 
 Starting off in Global Configuration mode we can get our switch setup according to the photo above.
 
@@ -276,7 +276,7 @@ Switch#
 
 Now a simple `show vlan brief` command and you can see under Ports the interfaces are assigned to our VLANs we created above.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/S1-show-interfaces--1024x438.png)
+![](/images/posts/2025/05/S1-show-interfaces.avif)
 
 _Notice the Containment VLAN has been assigned most of the interfaces?_
 
@@ -286,7 +286,7 @@ If you attempt a ping test now you may be hoping for some connectivity. However,
 
 So for the router settings we will need to configure a few subinterfaces to mingle with our VLANs. If you look at the picture below you may be wondering, "what is subinterface 10?" Lets grab a quick definition:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Router-Configuration-1024x610.jpg)
+![](/images/posts/2025/05/Router-Configuration.avif)
 
 Subinterfaces are logical divisions (virtual interface) of a physical interface on a router, allowing for multiple VLANs to be associated with a single physical link via 802.1Q tagging. These operate at Layer 3 - the network layer. Each subinterface has its own IP and VLAN ID, facilitating Inter-VLAN routing.
 
@@ -328,15 +328,15 @@ You may be asking yourself, "What is trunking? Uhmm, encapsulation? Dot1Q? Why d
 
 Watch the graphic to see how frames are tagged and routed below. If you look closely the trunk is carrying the ethernet frames from Switch1 to Switch2.
 
-_Note: our LAN design has each PC on a separate VLAN and our switch is only layer 2. So it will not function in the manner seen below. That is by design_.
+_Note: our LAN design has each PC on a separate VLAN and our switch is only layer 2. So it will not function in the manner seen below. That is by design.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/VLAN-Tagging.gif)
+![](/images/posts/2025/05/VLAN-Tagging.gif)
 
 Photo Credit: [NetworkAcademy](https://www.networkacademy.io/ccna/ethernet/vlan-trunking#:~:text=In%20order%20to%20overcome%20this,VLAN%2010%20and%20vice%2Dversa.)
 
 [Encapsulation](https://geekflare.com/cloud/encapsulation-networking/) - encapsulation is the process of adding headers and trailers to data as it moves down the protocol stack, essentially "wrapping" the data with information needed for each layer to function.  See below - a dot1Q (IEEE 802.1Q) tag has been added to an ethernet frame:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/802.1q-header-1024x448.png)
+![](/images/posts/2025/05/802.1q-header.avif)
 
 Photo Credit: [NetworkAcademy](https://www.networkacademy.io/ccna/ethernet/vlan-trunking#:~:text=In%20order%20to%20overcome%20this,VLAN%2010%20and%20vice%2Dversa.)
 
@@ -351,7 +351,7 @@ Switch(config-if)end
 Switch# show interfaces trunk
 ```
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Switch-Trunk-Status-1024x372.png)
+![](/images/posts/2025/05/Switch-Trunk-Status.avif)
 
 You can see clearly at the top under port that Fa0/1 is now set to a trunking status with 802.1q encapsulation. If we wanted to be more specific we could instruct the Cisco IOS to restrict the trunk to only certain VLANs as seen in categories such as "Vlans allowed on trunk" - but that isn't required for this project.
 
@@ -363,16 +363,16 @@ Now to double check the router for research purposes. Go back to the GUI and cli
 
 Scroll down through the text and see if anything looks interesting..... did you find anything? How about the router subinterface we created earlier?
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Router-subinterface-status-1024x615.png)
+![](/images/posts/2025/05/Router-subinterface-status.avif)
 
 FastEthernet0/1.10, FastEthernet0/1.20, and FastEthernet0/1.30 are all listed there with the encapsulation we configured, and a VLAN ID. By now your LAN should be functioning and ready for a **ping test**. Try to ping each PC one by one and see the results.
 
 If you ping from each PC you should see success on all but one: PC-D. See here:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/PC-D-Ping-Test-Failure-1024x294.png)
+![](/images/posts/2025/05/PC-D-Ping-Test-Failure.avif)
 
 If you go back up to the top and re-evaluate the steps you will see we assigned PC-D to the Containment VLAN and set FastEthernet0/13 to be part of it. That means that physical port is disabled from receiving data from the other three PCs. And this goes for all the interfaces assigned to the Containment VLAN.
 
 If you are familiar with Security+ this would be considered a technical control - and it's a tiny step towards a hardened server environment.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/05/Server-1024x1024.jpg)
+![](/images/posts/2025/05/Server.avif)

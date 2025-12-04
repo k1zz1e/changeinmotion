@@ -49,7 +49,7 @@ pvecm delnode elle3
 
 Boom - fixed. Then I got immediately got brave and decided to start installing CEPH on every node. I don't even understand CEPH yet - what could go wrong!! I setup 3 monitors elle2, elle3, elle4 - and now what is going on? Not entirely sure.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-19-at-8.27.14 PM-1024x810.png)
+![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-19-at-8.27.14 PM.avif)
 
 No excitement, other than this HEALTH\_WARN and a "OSD cound 0" in the summary. Wonder what I am missing a recklessly setup a Pool. I see it populated on all the nodes as "IDKPool" and then another HEALTH\_WARN popped - "Reduced data availability." I don't think I have the bandwidth for CEPH tonight.
 
@@ -57,7 +57,7 @@ ABORT!
 
 Returning back to my first mission (ADHD is a monster). Windows Server 2025! I must have tried to create this VM 5 times before realizing I had the wrong ISO. There are so many different versions. After grabbing the correct copy of the evaluation ISO I was good to go. Install complete.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-19-at-8.37.07 PM-1024x771.png)
+![](https://wbb.afh.mybluehost.me/wp-content/uploads/2024/12/Screenshot-2024-12-19-at-8.37.07 PM.avif)
 
 Now what to do with Windows Server 2025? My real goal was to pentest, explore features, and Active Directory configurations. These EliteDesk 800 G4s don't have virtualization features to accommodate Hyper-V. I may have to build out a new machine for that later.
 

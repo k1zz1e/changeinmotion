@@ -17,7 +17,7 @@ Welcome back to the Windows Server 2022 lab. I set this server up a while back i
 
 To get started we are going to need a few items from the [DoD Cyber Exchange](https://public.cyber.mil/). If your not familiar with this site, I would definitely check it out and click around - it's a necessity for DoD IT folks.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/DOD-Cyber-Exchange-STIG-1024x800.png)
+![](/images/posts/2025/06/DOD-Cyber-Exchange-STIG.avif)
 
 Items we will need for this project are in order below as they are seen on the Windows Server 2022 desktop in most of my screenshots:
 
@@ -33,7 +33,7 @@ Support Files:
 
 Most of those links are direct links to the tools and supporting files you need. You can find them all across the DoD Exchange site if you know where to look. After you get your tools downloaded and extracted, get them organized in a way that makes sense to you. Below I put the tools to the left and supporting document folders to the right of each they are related too.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/DC1-Desktop-Icons-1024x639.png)
+![](/images/posts/2025/06/DC1-Desktop-Icons.avif)
 
 The Tools in the first row of my Windows Desktop have a few additional folders to the right. I have added these to ease the understanding of what is happening behind the scenes with files. These are the folders:
 
@@ -47,7 +47,7 @@ _There are more options for [benchmarks](https://public.cyber.mil/stigs/scap/) t
 
 In the scc-5.10.2 folder, you open up the scc.exe - this will be the first tool used to check this Operating System for compliance. The SCAP Output folder on your desktop needs to be set in the **Options** menu of the SCAP Compliance Checker 5.10.2 tool (scc.exe) - click **Output Options** on the left and change the **SCC Results** as seen below to match your **SCAP Output** folder:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/SCAP-Output-1024x645.png)
+![](/images/posts/2025/06/SCAP-Output.avif)
 
 And then you will need to install the Microsoft Windows Server 2022 STIG SCAP Benchmark by clicking install at the top center. When the menu comes up "Select Content File(s) to Install" and browse to your SCC Benchmarks folder you created and select:  
   
@@ -55,15 +55,15 @@ And then you will need to install the Microsoft Windows Server 2022 STIG SCAP Be
   
 Then click install and you should end up with a visible benchmark in the center under Stream. You can then click Start Scan to the left.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/SCAP-Benchmark-Install-1024x645.png)
+![](/images/posts/2025/06/SCAP-Benchmark-Install.avif)
 
 After you scan completes you should see something similar to below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/SCAP-Scan-Complete-1024x645.png)
+![](/images/posts/2025/06/SCAP-Scan-Complete.avif)
 
 Which you can then click "View Results" and you will bring up another menu showing you a percentage score. In my Window Server 2022 VM it's 47.92 - which is a failing score for compliance.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/SCAP-Results-1024x645.png)
+![](/images/posts/2025/06/SCAP-Results.avif)
 
 In order to correct the low compliance score we will need to use the LGPO.exe to apply a quick Group Policy baseline.
 
@@ -75,7 +75,7 @@ C:\\Users\\Administrator\\Desktop\\LGPO\_30\\LGPO.exe
 
 If you type it in and your path is correct, you should execute the LGPO program as seen below and then scroll up and see the many options available.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/LGPO-Tool-1024x643.png)
+![](/images/posts/2025/06/LGPO-Tool.avif)
 
 Let's navigate to the folder by using:
 
@@ -85,7 +85,7 @@ That will make the commands slightly cleaner. In the next step make a backup of 
 
 LGPO.exe /b C:\\Users\\Administrator\\Desktop\\LGPO\_30
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/LGPO-GPO-Backup-1024x643.png)
+![](/images/posts/2025/06/LGPO-GPO-Backup.avif)
 
 You can see LGPO confirmed the backup location and it is visible in the LGPO folder as well.
 
@@ -93,21 +93,21 @@ Now to begin examining the [Group Policy Objects](https://public.cyber.mil/stigs
 
 If you browse through the folder and go into the Reports section you can find a .html file that explains a lot of the GPO settings being applied to the OS. The HTML files:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/GPO-HTML-Files-1024x643.png)
+![](/images/posts/2025/06/GPO-HTML-Files.avif)
 
 Here is a small section of the GPO - you can hide/show as necessary to satiate your quest for knowledge. I opened up the Account Policies/Password Policy section:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/GPO-Account-Policies-1024x643.png)
+![](/images/posts/2025/06/GPO-Account-Policies.avif)
 
 After you have completed a little review of the GPO we can move forward with the application of the **_DoD WinSvr 2022 MS and DC v2r4_** group policy. As seen below, the STIG GPO package we downloaded contains many different folders with DoD approved GPO. The one we will apply is named for the OS we are using in our domain controller. The notepad above shows the exact **path** we will use with LGPO and the **/g** modifier.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/STIG-GPO-Package-April-2025-1024x643.png)
+![](/images/posts/2025/06/STIG-GPO-Package-April-2025.avif)
 
 LGPO.exe /g "C:\\Users\\Administrator\\Desktop\\U\_STIG\_GPO\_Package\_April\_2025\\DoD WinSvr 2022 MS and DC v2r4"
 
 And you should see the completion of the GPO import with the LGPO tool:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/GPO-Applied-CMD-1024x643.png)
+![](/images/posts/2025/06/GPO-Applied-CMD.avif)
 
 Since we have applied all these policies, lets restart the server.
 
@@ -115,13 +115,13 @@ Now if you find yourself locked out of the Windows Server administrator account.
 
 The Adminstrator account was renamed "X\_Admin"
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/Administrator-Password-1024x610.png)
+![](/images/posts/2025/06/Administrator-Password.avif)
 
 Hopefully you didn't get locked out for long, if at all - I didn't really go into the details of setting up your virtual machine. Mine was only setup with an Administrator account.  
   
 Lets jump back to the SCAP tool within the scc-5.10.2 folder (scc.exe) and run another scan on the system.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/SCAP-Scan-Compliance-1024x643.png)
+![](/images/posts/2025/06/SCAP-Scan-Compliance.avif)
 
 Compliance is now at 96.88% \[GREEN\]. So that is considered a passing score for this Windows Server 2022 domain controller benchmark when using the SCAP Compliance Checker tool.
 
@@ -135,7 +135,7 @@ But is that all that can be done you may be asking? No, not at all - the rabbit 
 
 That file should have been next to the STIG Viewer folder the whole time because we will now need it (top row below). Open up the STIG Viewer and go to the top - under **File > Import STIG** - then locate the **_U\_MS\_Windows\_Server\_2022\_V2R4\_STIG.zip_** in the folder we just added to the top row on the Desktop. It should appear in the STIG Viewer after you open it as seen below:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/STIG-Viewer-1024x636.png)
+![](/images/posts/2025/06/STIG-Viewer.avif)
 
 Now you need to go up to **Checklist > Create Checklist - Check Marked STIG(s)** and then you should see a tab appear called **\*New Checklist** and then click on **File >** **Save Checklist As...**  
   
@@ -143,7 +143,7 @@ You can save it to the folder on the Desktop called "Checklist STIG" - I called 
 
 Next go up and click on **Import > XCCDF Results File...** in the STIG Viewer menu and navigate to the folder "SCAP Output" - search for XCCDF to make your search simpler, then select the file with **_XCCDF-Results\_MS\_Windows\_Server\_2022\_STIG_** in the name. You should then see some color coding on your STIGs in the center. This will aid in the investigation of compliant and non-compliant CAT I, CAT II, and CAT III vulnerabilities.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/XCCDF-Import-1024x642.png)
+![](/images/posts/2025/06/XCCDF-Import.avif)
 
 This is where the rabbit hole deepens! Each one of those green **Vul IDs** contain issues that must be addressed and documented to ensure your network/assets have authority to operate (ATO). They contain a lot of different modifications that must be made to the system you are checking for compliance - and that could take a whole other post to document that. But if you are already attuned to editing the registry you can handle that pretty easy.
 
@@ -155,13 +155,13 @@ Powershell excellence is something to applaud. Many of us struggle through it on
 
 certutil -hashfile C:\\Users\\Administrator\\Desktop\\Evaluate-STIG\_1.2504.2.zip SHA256
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/Evaluate-STIG-Hash-1024x636.png)
+![](/images/posts/2025/06/Evaluate-STIG-Hash.avif)
 
 The hash checks out with the SHA256 in the text file provided by the NAVSEA team. Now we can begin the work! Inside the Evaluate-STIG folder is a nice **_User Guide_** that spells out a lot of the commands - definitely read over that if you can download the file. The one I am using is supplied in the guide:
 
 .\\Evaluate-STIG.ps1 -ScanType Unlcassified -Output CKL,CKLB -AllowDeprecated
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/Evalute-STIG-Command-1024x220.png)
+![](/images/posts/2025/06/Evalute-STIG-Command.avif)
 
 The command above performs an Unclassified (default) scan, saving the results as both **.CKL** and **.CKLB** files, and enables deprecated STIG scanning.
 
@@ -169,11 +169,11 @@ As you can see, the Powershell script runs pretty effortlessly. It was tailored 
 
 Going to the folder where the CKL/CKLB files were saved to we can double click and open our a CKL file in STIG Viewer to see compliance levels.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/Evaluate-STIG-CKL-CKLB-1024x642.png)
+![](/images/posts/2025/06/Evaluate-STIG-CKL-CKLB.avif)
 
 I chose the WinServer2022\_V2R4 CKL file. You may have to find the STIG Viewer program after you double click on a CKL. Below you can see how the CKL looks after you open it. You can sort through all the different Vulnerabilities and fix them as applicable.
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/WinServer2022_V2R4-CKL-1024x642.png)
+![](/images/posts/2025/06/WinServer2022_V2R4-CKL.avif)
 
 Much of the documentation side I have not gone into for this post on STIG compliance, such as Answer Files, Non-Finding exceptions - but just know it is crucial for ATO. There is just so much to cover for these tools, documentation and compliance - more than I can put together in one post! For a basic overview this should suffice!
 
@@ -181,6 +181,6 @@ And more importantly I feel this is my gateway opportunity into Ansible. As seen
   
 I've already spun up two control nodes for Ansible - one RHEL 9.5 VM and one Ubuntu 22.04 container in Proxmox:
 
-![](https://wbb.afh.mybluehost.me/wp-content/uploads/2025/06/Proxmox-Ansible-VMs-1024x711.png)
+![](/images/posts/2025/06/Proxmox-Ansible-VMs.avif)
 
 See the [DoD Cyber Exchange](https://public.cyber.mil/stigs/supplemental-automation-content/) for a few of the options to utilize with Ansible. Now it's time to figure out this network setup and get to learning about Playbooks!
